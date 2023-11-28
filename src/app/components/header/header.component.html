@@ -1,0 +1,41 @@
+<header>
+  <h2 class="logo">
+    <a routerLink="">Game of Thrones</a>
+  </h2>
+  <ul
+    [ngClass]="{
+    'show-nav-links': toggleNav,
+  }"
+  >
+    <li>
+      <a routerLink="/" fragment="houses" (click)="toggleNav = !toggleNav"
+        >Houses</a
+      >
+    </li>
+    <li>
+      <a routerLink="/" fragment="characters" (click)="toggleNav = !toggleNav"
+        >Persons</a
+      >
+    </li>
+    <li>
+      <a routerLink="" fragment="quotes" (click)="toggleNav = !toggleNav"
+        >Quotes</a
+      >
+    </li>
+  </ul>
+  <button
+    type="button"
+    class="toggle-btn"
+    (click)="toggleNav = !toggleNav"
+    [attr.aria-expanded]="toggleNav"
+    [ngClass]="{
+    'open': toggleNav,
+  }"
+  >
+    <svg width="24" height="24" viewBox="0 0 32 31" class="hamburger">
+      <rect width="32" height="2.5" x="0" y="5" />
+      <rect width="32" height="2.5" x="0" y="16" />
+      <rect width="32" height="2.5" x="0" y="27" />
+    </svg>
+  </button>
+</header>

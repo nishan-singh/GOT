@@ -1,0 +1,103 @@
+@import "../../../variables.scss";
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: $cream-color;
+  color: $green-color;
+  padding-inline: 5% 0;
+  h2 {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin-inline-end: 48px;
+    font-weight: normal;
+    color: $red-color;
+    font-style: italic;
+  }
+  ul {
+    display: flex;
+    li {
+      margin-inline-start: 32px;
+      a {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+        border-bottom: 2px solid transparent;
+        transition: border-color 225ms linear;
+        &:hover {
+          border-color: $red-color;
+        }
+      }
+    }
+  }
+}
+
+.toggle-btn {
+  display: none;
+  z-index: 999;
+  background-color: transparent;
+  svg {
+    width: 32px;
+    height: 32px;
+    fill: $red-color;
+  }
+  rect {
+    transition: y 175ms ease-in 175ms, rotate 175ms ease-in, opacity 0ms 175ms;
+    transform-origin: center;
+  }
+  &[aria-expanded="true"] rect {
+    transition: y 175ms ease-in, rotate 175ms ease-in 175ms, opacity 0ms 175ms;
+  }
+  &[aria-expanded="true"] rect:nth-child(odd) {
+    y: 15;
+  }
+  &[aria-expanded="true"] rect:nth-child(1) {
+    rotate: 45deg;
+  }
+  &[aria-expanded="true"] rect:nth-child(3) {
+    rotate: -45deg;
+  }
+  &[aria-expanded="true"] rect:nth-child(even) {
+    opacity: 0;
+  }
+}
+
+.open {
+  svg {
+    fill: $red-color;
+  }
+}
+
+@media (max-width: 572px) {
+  .toggle-btn {
+    display: block;
+  }
+  header {
+    padding-inline: 24px 12px;
+    justify-content: space-between;
+    ul {
+      position: fixed;
+      transform: translateX(232px);
+      top: 0;
+      right: 0;
+      width: 232px;
+      height: 100vh;
+      background-color: $cream-color;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      padding-block-start: 5rem;
+      li {
+        margin-block-end: 1.5rem;
+      }
+    }
+    .show-nav-links {
+      transform: translateX(0);
+      visibility: visible;
+    }
+  }
+}
