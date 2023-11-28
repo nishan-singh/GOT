@@ -1,6 +1,21 @@
+@import "../../../variables.scss";
+
 .character-name {
   margin-block-end: 1rem;
 }
 .house {
   margin-block-end: 2rem;
+}
+
+.quotes-header {
+  display: flex;
+  justify-content: space-between;
+  button {
+    background-color: $cream-color;
+    color: $red-color;
+    &:hover {
+      background-color: $red-color;
+      color: $cream-color;
+    }
+  }
 }

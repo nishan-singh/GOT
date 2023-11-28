@@ -9,12 +9,29 @@
     🏰 {{ characterInfos?.house?.name }}
   </h2>
   <div class="infos-wrapper">
-    <h3>Quotes 📝</h3>
-    <ul *ngIf="characterInfos.quotes; else noQuotes">
+    <header class="quotes-header">
+      <h3>Quotes 📝</h3>
+      <button
+        type="button"
+        class="get-other-quotes primary-btn"
+        (click)="getOtherQuotes()"
+      >
+        {{
+          !showOtherQuotes
+            ? "Get Other Quotations"
+            : "Get this Character Quotations"
+        }}
+      </button>
+    </header>
+    <ul *ngIf="characterInfos.quotes && !showOtherQuotes; else otherQuotesList">
       <li *ngFor="let quotes of characterInfos.quotes">{{ quotes }}</li>
     </ul>
-    <ng-template #noQuotes>
-      <p>No Quotes Found</p>
+    <ng-template #otherQuotesList>
+      <ul>
+        <li *ngFor="let otherQuotes of getOtherQuotes$ | async">
+          {{ otherQuotes.sentence }}
+        </li>
+      </ul>
     </ng-template>
     <a routerLink="/" class="primary-btn"> Go Back </a>
   </div>
