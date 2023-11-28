@@ -1,0 +1,21 @@
+<section
+  class="character-infos-wrapper subpage-utility-css"
+  *ngFor="let characterInfos of characterInfo$ | async"
+>
+  <h1 class="character-name">
+    {{ characterInfos.name }}
+  </h1>
+  <h2 class="house" *ngIf="characterInfos?.house">
+    🏰 {{ characterInfos?.house?.name }}
+  </h2>
+  <div class="infos-wrapper">
+    <h3>Quotes 📝</h3>
+    <ul *ngIf="characterInfos.quotes; else noQuotes">
+      <li *ngFor="let quotes of characterInfos.quotes">{{ quotes }}</li>
+    </ul>
+    <ng-template #noQuotes>
+      <p>No Quotes Found</p>
+    </ng-template>
+    <a routerLink="/" class="primary-btn"> Go Back </a>
+  </div>
+</section>
