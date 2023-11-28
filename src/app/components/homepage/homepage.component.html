@@ -1,0 +1,102 @@
+<main *ngIf="checkIfHousesLoaded">
+  <section class="houses-wrapper container-utility" id="houses">
+    <h2>Game of Thrones - Houses</h2>
+    <div class="inner-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="d-flex">
+              <h3>GOT - Houses 🏰</h3>
+              <input
+                type="search"
+                name="search-for-houses"
+                class="search-input"
+                id=""
+                placeholder="Search for House"
+              />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let eachHouse of houses">
+            <td>
+              <a [routerLink]="['/house/' + eachHouse.slug]">
+                {{ eachHouse.name }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="person-wrapper container-utility" id="characters">
+    <h2>Game of Thrones - Persons</h2>
+    <div class="inner-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <h3>GOT - Persons 👯</h3>
+            </th>
+            <th class="d-flex">
+              <h3>House</h3>
+              <input
+                type="search"
+                name="search-for-persons"
+                class="search-input person-input"
+                id=""
+                placeholder="Search for Character"
+              />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let eachPerson of characters$ | async">
+            <td>
+              <a [routerLink]="['/character/' + eachPerson.slug]">
+                {{ eachPerson.name }}
+              </a>
+            </td>
+            <td>
+              {{
+                eachPerson.house
+                  ? eachPerson.house.name
+                  : "No house for this person"
+              }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="quotes-wrapper container-utility" id="quotes">
+    <h2>Game of Thrones - Quotes</h2>
+    <div class="inner-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="d-flex">
+              <h3>GOT - Quotes 📝</h3>
+              <button
+                type="button"
+                (click)="getRandomQuotes()"
+                class="primary-btn"
+              >
+                Get Random Quotes
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let eachQuote of quotes$ | async">
+            <td class="quotes">
+              {{ eachQuote.sentence }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
