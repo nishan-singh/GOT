@@ -17,8 +17,8 @@ import { CharacterInfoComponent } from './components/character-info/character-in
     HouseInfoComponent,
     CharacterInfoComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
 })
 export class AppModule {}

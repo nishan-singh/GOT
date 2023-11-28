@@ -64,6 +64,13 @@ button {
   padding: 0.5rem 1rem;
 }
 
+.d-col-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 //utility classes
 .subpage-utility-css {
   width: 100%;
@@ -90,6 +97,74 @@ button {
       margin-block-end: 1rem;
     }
   }
+}
+
+// table styles
+
+.renderer-table {
+  width: 100%;
+  color: $cream-color;
+  border-collapse: collapse;
+  thead {
+    text-align: left;
+  }
+  thead th.d-flex {
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .search-input {
+    border: 2px solid $red-color;
+    color: $green-color;
+    font-weight: bold;
+    width: 25%;
+    font-size: 0.9rem;
+    z-index: 99;
+    padding: 0.5rem;
+  }
+  .person-input {
+    width: 35%;
+  }
+  th {
+    padding: 0.75rem 1.5rem 0.75rem 0;
+  }
+  th:first-child {
+    padding: 0.75rem 1.5rem;
+  }
+  tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: color 225ms linear;
+    width: 100%;
+  }
+  tbody tr:hover {
+    background-color: $red-color;
+  }
+  tr:last-child td {
+    border-radius: 0 0 12px 12px;
+  }
+  td {
+    font-weight: 400;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    height: 100%;
+    a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  td.quotes {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+.character tr:last-child td:last-child {
+  border-radius: 0 0 12px 0;
+}
+
+.character tr:last-child td:first-child {
+  border-radius: 0 0 0 12px;
 }
 
 @media (max-width: 768px) {

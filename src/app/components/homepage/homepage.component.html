@@ -2,7 +2,7 @@
   <section class="houses-wrapper container-utility" id="houses">
     <h2>Game of Thrones - Houses</h2>
     <div class="inner-wrapper">
-      <table>
+      <table class="renderer-table">
         <thead>
           <tr>
             <th class="d-flex">
@@ -13,11 +13,12 @@
                 class="search-input"
                 id=""
                 placeholder="Search for House"
+                (input)="searchHousesByName($event)"
               />
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="!searchingHouses; else searchedHouseList">
           <tr *ngFor="let eachHouse of houses">
             <td>
               <a [routerLink]="['/house/' + eachHouse.slug]">
@@ -26,6 +27,24 @@
             </td>
           </tr>
         </tbody>
+
+        <!-- ng-template is used to render the searched houses -->
+        <ng-template #searchedHouseList>
+          <tbody *ngIf="foundHouses.length > 0; else noHouseFound">
+            <tr *ngFor="let foundHouse of foundHouses">
+              <td>
+                <a [routerLink]="['/house/' + foundHouse.slug]">
+                  {{ foundHouse.name }}
+                </a>
+              </td>
+            </tr>
+          </tbody>
+          <!-- fallback for no houses found with semantic elements for accessibility -->
+          <ng-template #noHouseFound>
+            <h4>😬 Oops! No Houses Found</h4>
+          </ng-template>
+          <!-- End -->
+        </ng-template>
       </table>
     </div>
   </section>
@@ -33,7 +52,7 @@
   <section class="person-wrapper container-utility" id="characters">
     <h2>Game of Thrones - Persons</h2>
     <div class="inner-wrapper">
-      <table>
+      <table class="renderer-table character">
         <thead>
           <tr>
             <th>
@@ -47,12 +66,13 @@
                 class="search-input person-input"
                 id=""
                 placeholder="Search for Character"
+                (input)="searchCharactersByName($event)"
               />
             </th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let eachPerson of characters$ | async">
+        <tbody *ngIf="!searchingCharacters; else searchedCharacterList">
+          <tr *ngFor="let eachPerson of characters">
             <td>
               <a [routerLink]="['/character/' + eachPerson.slug]">
                 {{ eachPerson.name }}
@@ -67,6 +87,29 @@
             </td>
           </tr>
         </tbody>
+        <ng-template #searchedCharacterList>
+          <tbody *ngIf="foundCharacters.length > 0; else noCharacterFound">
+            <tr *ngFor="let eachHouse of foundCharacters">
+              <td>
+                <a [routerLink]="['/house/' + eachHouse.slug]">
+                  {{ eachHouse.name }}
+                </a>
+              </td>
+              <td>
+                {{
+                  eachHouse.house
+                    ? eachHouse.house.name
+                    : "No house for this person"
+                }}
+              </td>
+            </tr>
+          </tbody>
+          <!-- fallback for no characters found with semantic elements for accessibility -->
+          <ng-template #noCharacterFound>
+            <h4>😬 Oops! No Characters Found</h4>
+          </ng-template>
+          <!-- End -->
+        </ng-template>
       </table>
     </div>
   </section>
@@ -74,7 +117,7 @@
   <section class="quotes-wrapper container-utility" id="quotes">
     <h2>Game of Thrones - Quotes</h2>
     <div class="inner-wrapper">
-      <table>
+      <table class="renderer-table">
         <thead>
           <tr>
             <th class="d-flex">
